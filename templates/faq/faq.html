@@ -1,0 +1,281 @@
+{% extends 'base.html' %}
+
+{% block title %}Frequently Asked Questions - Avera{% endblock %}
+
+{% block content %}
+<style>
+    /* Custom FAQ Styles */
+    .section-subtitle {
+        font-size: 18px;
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 30px 0 15px 0;
+        padding-bottom: 6px;
+        border-bottom: 2px solid #e2e8f0;
+    }
+
+    .faq-item {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        transition: all 0.2s ease;
+    }
+
+    .faq-item.green-style {
+        background-color: #f0fdf4;
+        border-color: #bbf7d0;
+    }
+
+    .faq-btn {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        padding: 18px 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #2c3e50;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .faq-item.green-style .faq-btn {
+        color: #047857;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 0 20px 18px 20px;
+        color: #475569;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+</style>
+
+<div style="max-width: 850px; margin: 30px auto; padding: 0 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+    <!-- Header Section -->
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h2 style="color: #2c3e50; font-size: 28px; font-weight: 800; margin: 0 0 8px 0;">Frequently Asked Questions</h2>
+        <p style="color: #64748b; font-size: 15px; margin: 0 0 20px 0;">Have questions? Find quick answers or ask our AI Support Assistant live.</p>
+
+        <!-- Search Bar -->
+        <div style="position: relative; max-width: 500px; margin: 0 auto;">
+            <input type="text" id="faqSearch" onkeyup="searchFAQ()" placeholder="Search your question here..." style="width: 100%; padding: 12px 20px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); outline: none; box-sizing: border-box;">
+        </div>
+    </div>
+
+    <!-- Live Ask Question Form Section -->
+    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+        <h3 style="color: #2c3e50; font-size: 18px; margin-bottom: 10px;">💬 Ask a Question Live</h3>
+        <p style="color: #64748b; font-size: 13px; margin-bottom: 15px;">Type your question below to get an instant answer or submit it to our support team.</p>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <input type="text" id="liveUserQuestion" placeholder="e.g., How do I register as an organization?" style="flex: 1; min-width: 250px; padding: 10px 15px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 8px; outline: none;">
+            <button onclick="askLiveQuestion()" style="background: #1abc9c; color: white; border: none; padding: 10px 20px; font-size: 14px; font-weight: 600; border-radius: 8px; cursor: pointer;">Ask Question</button>
+        </div>
+
+        <!-- Live Instant Answer Response Container -->
+        <div id="liveAnswerBox" style="display: none; margin-top: 15px; padding: 15px; background: #eefdf9; border-left: 4px solid #1abc9c; border-radius: 6px;">
+            <strong style="color: #16a085; font-size: 14px; display: block; margin-bottom: 5px;">🤖 Avera Assistant Response:</strong>
+            <p id="liveAnswerText" style="color: #333; font-size: 14px; margin: 0; line-height: 1.5;"></p>
+        </div>
+    </div>
+
+    <!-- 1. GENERAL QUESTIONS SECTION -->
+    <h3 class="section-subtitle">General Questions</h3>
+    <div id="faqContainer" style="display: flex; flex-direction: column; gap: 12px;">
+
+        <!-- FAQ Item 1 -->
+        <div class="faq-item">
+            <button onclick="toggleFAQ(this)" class="faq-btn">
+                <span class="faq-question">How can I share my adoption story on Avera?</span>
+                <span class="faq-icon" style="color: #1abc9c; font-size: 18px; transition: transform 0.2s;">+</span>
+            </button>
+            <div class="faq-answer">
+                You can go to the <strong>Stories</strong> page and click on the <strong>Get Started</strong> button. Fill in your details and click "Publish Story" to share your journey with the community.
+            </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item">
+            <button onclick="toggleFAQ(this)" class="faq-btn">
+                <span class="faq-question">How do I track my gifts and donations?</span>
+                <span class="faq-icon" style="color: #1abc9c; font-size: 18px; transition: transform 0.2s;">+</span>
+            </button>
+            <div class="faq-answer">
+                All updates regarding your gifts, including delivery status and organization acknowledgments, will appear under your <strong>Notifications</strong> page.
+            </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item">
+            <button onclick="toggleFAQ(this)" class="faq-btn">
+                <span class="faq-question">What is an Organization Wishlist?</span>
+                <span class="faq-icon" style="color: #1abc9c; font-size: 18px; transition: transform 0.2s;">+</span>
+            </button>
+            <div class="faq-answer">
+                Organizations list specific items (like school bags, books, or clothing) that children currently need. You can view these wishlists and fulfill them directly.
+            </div>
+        </div>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-item">
+            <button onclick="toggleFAQ(this)" class="faq-btn">
+                <span class="faq-question">How can I contact support if I face any issues?</span>
+                <span class="faq-icon" style="color: #1abc9c; font-size: 18px; transition: transform 0.2s;">+</span>
+            </button>
+            <div class="faq-answer">
+                You can reach out through the <strong>Support</strong> page in the top navbar or submit your query, and our team will get back to you shortly.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 2. ADOPTION PROCESS QUESTIONS SECTION (FIXED TO USE TOGGLE FAQ) -->
+    <h3 class="section-subtitle">Adoption Process Questions</h3>
+    <div id="adoptionFaqContainer" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px;">
+
+        <!-- FAQ Item 1 -->
+        <div class="faq-item green-style">
+            <button onclick="toggleFAQ(this)" class="faq-btn">
+                <span class="faq-question">How long does the adoption process take?</span>
+                <span class="faq-icon" style="color: #059669; font-size: 18px; transition: transform 0.2s;">+</span>
+            </button>
+            <div class="faq-answer">
+                The timeline varies depending on background checks, home visits, and legal processing. Typically, the full process takes between 3 to 9 months.
+            </div>
+        </div>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item green-style">
+            <button onclick="toggleFAQ(this)" class="faq-btn">
+                <span class="faq-question">Are single parents eligible to apply?</span>
+                <span class="faq-icon" style="color: #059669; font-size: 18px; transition: transform 0.2s;">+</span>
+            </button>
+            <div class="faq-answer">
+                Yes, single individuals who meet our financial, emotional, and background eligibility criteria can apply for adoption through Avera.
+            </div>
+        </div>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item green-style">
+            <button onclick="toggleFAQ(this)" class="faq-btn">
+                <span class="faq-question">What support does Avera provide during post-adoption?</span>
+                <span class="faq-icon" style="color: #059669; font-size: 18px; transition: transform 0.2s;">+</span>
+            </button>
+            <div class="faq-answer">
+                We offer counseling, medical advisory guidance, and routine check-ins for 12 months after adoption to help the child settle seamlessly into their new family.
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Universal Accordion & Search JavaScript -->
+<script>
+    function toggleFAQ(button) {
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector('.faq-icon');
+
+        if (answer.style.display === 'block') {
+            answer.style.display = 'none';
+            if (icon) icon.innerText = '+';
+        } else {
+            // Close all answers across both containers
+            document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+            document.querySelectorAll('.faq-icon').forEach(ic => ic.innerText = '+');
+
+            answer.style.display = 'block';
+            if (icon) icon.innerText = '−';
+        }
+    }
+
+    function searchFAQ() {
+        const input = document.getElementById('faqSearch').value.toLowerCase();
+        const items = document.querySelectorAll('.faq-item');
+
+        items.forEach(item => {
+            const questionText = item.querySelector('.faq-question') ? item.querySelector('.faq-question').innerText.toLowerCase() : '';
+            const answerText = item.querySelector('.faq-answer') ? item.querySelector('.faq-answer').innerText.toLowerCase() : '';
+
+            if (questionText.includes(input) || answerText.includes(input)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    function askLiveQuestion() {
+        const inputField = document.getElementById('liveUserQuestion');
+        const query = inputField.value.trim().toLowerCase();
+        const rawQuestion = inputField.value.trim();
+        const box = document.getElementById('liveAnswerBox');
+        const text = document.getElementById('liveAnswerText');
+
+        if (!query) {
+            alert("Please type a question before asking!");
+            return;
+        }
+
+        box.style.display = "block";
+        text.innerHTML = "⏳ <em>Avera Assistant is thinking...</em>";
+
+        setTimeout(() => {
+            let answer = "";
+
+            if (query.includes("register") || query.includes("account") || query.includes("sign up") || query.includes("signup")) {
+                answer = "To register, click on the 'Register' button in the top right navigation bar. Choose your role and complete the form to create your account.";
+            }
+            else if (query.includes("login") || query.includes("sign in") || query.includes("signin")) {
+                answer = "Click on 'Login' in the navbar, enter your registered credentials, and access your dashboard.";
+            }
+            else if (query.includes("adopt") || query.includes("adoption") || query.includes("process") || query.includes("eligibility")) {
+                answer = "You can view eligibility criteria, step-by-step roadmaps, and guidelines on our 'Adoption' page. Go to the Adoption tab to get complete details.";
+            }
+            else if (query.includes("child") || query.includes("children") || query.includes("info")) {
+                answer = "Explore 'Children Info' in the main navigation menu to view verified details and profiles of children supported by partner organizations.";
+            }
+            else if (query.includes("donate") || query.includes("gift") || query.includes("wishlist") || query.includes("support")) {
+                answer = "Visit 'Organizations' to view active wishlists or check the 'Support' section to send gifts, donations, or track contribution status.";
+            }
+            else if (query.includes("story") || query.includes("post") || query.includes("share")) {
+                answer = "Go to the 'Stories' section in the top menu to share your personal adoption experience or read inspiring journeys from others.";
+            }
+            else if (query.includes("contact") || query.includes("help") || query.includes("issue") || query.includes("feedback")) {
+                answer = "You can submit your query on the 'Support' or 'Feedback' page. Our dedicated support team will reach out to you shortly.";
+            }
+            else {
+                answer = `Thank you for asking! We have logged your query: <strong>"${rawQuestion}"</strong>. Our team will review this shortly. Meanwhile, feel free to visit our Support page.`;
+                addNewFAQItem(rawQuestion, answer);
+            }
+
+            text.innerHTML = answer;
+            inputField.value = "";
+        }, 500);
+    }
+
+    function addNewFAQItem(questionText, answerText) {
+        const container = document.getElementById('faqContainer');
+        const newItem = document.createElement('div');
+        newItem.className = 'faq-item';
+
+        newItem.innerHTML = `
+            <button onclick="toggleFAQ(this)" class="faq-btn">
+                <span class="faq-question">${questionText}</span>
+                <span class="faq-icon" style="color: #1abc9c; font-size: 18px;">+</span>
+            </button>
+            <div class="faq-answer">
+                ${answerText}
+            </div>
+        `;
+        container.prepend(newItem);
+    }
+</script>
+{% endblock %}
