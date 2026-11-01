@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Avera{% endblock %}
+
+{% block content %}
+<div style="max-width: 420px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); font-family: sans-serif;">
+    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Create an Account</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div style="background: {% if message.tags == 'error' %}#fee2e2{% else %}#d1fae5{% endif %}; border: 1px solid {% if message.tags == 'error' %}#f87171{% else %}#34d399{% endif %}; color: {% if message.tags == 'error' %}#991b1b{% else %}#065f46{% endif %}; padding: 10px; border-radius: 6px; font-size: 13px; margin-bottom: 15px; text-align: center;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; font-size: 14px; color: #475569; margin-bottom: 5px;">Username</label>
+            <input type="text" name="username" required placeholder="Choose a username" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; font-size: 14px; color: #475569; margin-bottom: 5px;">Email Address</label>
+            <input type="email" name="email" required placeholder="name@example.com" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; font-size: 14px; color: #475569; margin-bottom: 5px;">Password</label>
+            <input type="password" name="password" required placeholder="Enter password" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 14px; color: #475569; margin-bottom: 5px;">Confirm Password</label>
+            <input type="password" name="confirm_password" required placeholder="Confirm password" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; outline: none; box-sizing: border-box;">
+        </div>
+
+        <button type="submit" style="width: 100%; background: #1abc9c; color: white; padding: 12px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Register</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <p style="font-size: 14px; color: #64748b;">Already have an account?</p>
+        <a href="{% url 'login' %}" style="color: #1abc9c; font-weight: 600; text-decoration: none;">Login Here &rarr;</a>
+    </div>
+</div>
+{% endblock %}
