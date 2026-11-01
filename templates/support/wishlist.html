@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+
+{% block title %}Children Wishlists - Avera{% endblock %}
+
+{% block content %}
+<div style="max-width: 1140px; margin: 0 auto; padding: 20px 15px; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+
+    <!-- Hero Header Section -->
+    <div style="text-align: center; margin-bottom: 50px; background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%); padding: 40px 20px; border-radius: 16px; border: 1px solid #f1f5f9;">
+        <span style="color: #0d9488; background: #ccfbf1; font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: 1.2px; padding: 6px 14px; border-radius: 20px;">
+            SUPPORT A CHILD DIRECTLY
+        </span>
+        <h1 style="color: #0f172a; margin-top: 15px; font-size: 36px; font-weight: 800; letter-spacing: -0.5px;">Children's Personal Wishlists</h1>
+        <p style="color: #475569; font-size: 16px; max-width: 650px; margin: 12px auto 0; line-height: 1.6;">
+            Help fulfill the specific dreams, education, and daily needs of individual children living in our partner care shelters.
+        </p>
+    </div>
+
+    <!-- Wishlist Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; margin-bottom: 60px;">
+
+        <!-- Child Wishlist Card 1 -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <!-- Child Photo & Wish Header -->
+                <div style="height: 180px; overflow: hidden; position: relative;">
+                    <img src="https://thumbs.dreamstime.com/b/portrait-unidentified-indian-poor-kid-boy-smiling-outddor-street-pondichery-puducherry-tamil-nadu-india-september-122847311.jpg" alt="Arif" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; top: 12px; right: 12px; background: #ffffff; color: #0d9488; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        ID: AV-1024
+                    </span>
+                </div>
+
+                <div style="padding: 20px 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h3 style="color: #0f172a; font-size: 20px; font-weight: 700; margin: 0;">Arif (Age: 9)</h3>
+                        <span style="background: #e0e7ff; color: #3730a3; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px;">🎨 Drawing Kit</span>
+                    </div>
+
+                    <p style="color: #64748b; font-size: 13px; margin: 0 0 12px 0;">Care Center: JAAGO Foundation, Dhaka</p>
+
+                    <div style="background: #f8fafc; border-left: 3px solid #0d9488; padding: 10px 12px; border-radius: 4px; margin-bottom: 16px;">
+                        <span style="font-size: 11px; color: #475569; font-weight: 700; text-transform: uppercase;">Wishlist Item</span>
+                        <p style="color: #334155; font-size: 14px; font-weight: 600; margin: 2px 0 0 0;">Art Color Set & Drawing Notebooks</p>
+                    </div>
+
+                    <p style="color: #475569; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
+                        Arif loves to draw trees and houses! He wishes for a complete professional color pastel set and sketchpads.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Progress & Donate Action -->
+            <div style="background: #f8fafc; padding: 18px 24px; border-top: 1px solid #f1f5f9;">
+                <div style="margin-bottom: 14px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px;">
+                        <span>Raised: <strong style="color: #0f172a;">৳200</strong></span>
+                        <span>Target: <strong style="color: #0f172a;">৳2,000</strong></span>
+                    </div>
+                    <div style="width: 100%; background: #e2e8f0; height: 8px; border-radius: 10px; overflow: hidden;">
+                        <div style="width: 60%; background: linear-gradient(90deg, #0d9488, #14b8a6); height: 100%;"></div>
+                    </div>
+                </div>
+
+                <button onclick="openDonateModal('Arif', 'Art Color Set & Drawing Notebooks', 'AV-1024')" style="width: 100%; background: #0d9488; color: #ffffff; border: none; padding: 10px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer;">
+                    Fulfill Arif's Wish
+                </button>
+            </div>
+        </div>
+
+        <!-- Child Wishlist Card 2 -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="height: 180px; overflow: hidden; position: relative;">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.PKejGlRfcpIaYU2QEwv3XgHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ananya" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; top: 12px; right: 12px; background: #ffffff; color: #0d9488; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        ID: AV-1025
+                    </span>
+                </div>
+
+                <div style="padding: 20px 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h3 style="color: #0f172a; font-size: 20px; font-weight: 700; margin: 0;">Ananya (Age: 6)</h3>
+                        <span style="background: #dcfce7; color: #166534; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px;">🎒 School Supplies</span>
+                    </div>
+
+                    <p style="color: #64748b; font-size: 13px; margin: 0 0 12px 0;">Care Center: SOS Villages, Chittagong</p>
+
+                    <div style="background: #f8fafc; border-left: 3px solid #0d9488; padding: 10px 12px; border-radius: 4px; margin-bottom: 16px;">
+                        <span style="font-size: 11px; color: #475569; font-weight: 700; text-transform: uppercase;">Wishlist Item</span>
+                        <p style="color: #334155; font-size: 14px; font-weight: 600; margin: 2px 0 0 0;">New School Bag & Water Bottle</p>
+                    </div>
+
+                    <p style="color: #475569; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
+                        Ananya is starting Class 1 next month! She wishes for a pink school bag and a water bottle for her classes.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: #f8fafc; padding: 18px 24px; border-top: 1px solid #f1f5f9;">
+                <div style="margin-bottom: 14px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px;">
+                        <span>Raised: <strong style="color: #0f172a;">৳500</strong></span>
+                        <span>Target: <strong style="color: #0f172a;">৳2000</strong></span>
+                    </div>
+                    <div style="width: 100%; background: #e2e8f0; height: 8px; border-radius: 10px; overflow: hidden;">
+                        <div style="width: 72%; background: linear-gradient(90deg, #0d9488, #14b8a6); height: 100%;"></div>
+                    </div>
+                </div>
+
+                <button onclick="openDonateModal('Ananya', 'New School Bag & Water Bottle', 'AV-1025')" style="width: 100%; background: #0d9488; color: #ffffff; border: none; padding: 10px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer;">
+                    Fulfill Ananya's Wish
+                </button>
+            </div>
+        </div>
+
+        <!-- Child Wishlist Card 3 -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="height: 180px; overflow: hidden; position: relative;">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.025k_EDq24oiSLqw-rsW3wHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Rohan" style="width: 100%; height: 100%; object-fit: cover;">
+                    <span style="position: absolute; top: 12px; right: 12px; background: #ffffff; color: #0d9488; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        ID: AV-1026
+                    </span>
+                </div>
+
+                <div style="padding: 20px 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <h3 style="color: #0f172a; font-size: 20px; font-weight: 700; margin: 0;">Rohan (Age: 7)</h3>
+                        <span style="background: #ffedd5; color: #9a3412; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px;">⚽ Toys & Sports</span>
+                    </div>
+
+                    <p style="color: #64748b; font-size: 13px; margin: 0 0 12px 0;">Care Center: Child Care Society, Sylhet</p>
+
+                    <div style="background: #f8fafc; border-left: 3px solid #0d9488; padding: 10px 12px; border-radius: 4px; margin-bottom: 16px;">
+                        <span style="font-size: 11px; color: #475569; font-weight: 700; text-transform: uppercase;">Wishlist Item</span>
+                        <p style="color: #334155; font-size: 14px; font-weight: 600; margin: 2px 0 0 0;">Football & Sports Shoes</p>
+                    </div>
+
+                    <p style="color: #475569; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
+                        Rohan loves playing football in the afternoon! He wishes for a new football and sports sneakers.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: #f8fafc; padding: 18px 24px; border-top: 1px solid #f1f5f9;">
+                <div style="margin-bottom: 14px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 6px;">
+                        <span>Raised: <strong style="color: #0f172a;">৳800</strong></span>
+                        <span>Target: <strong style="color: #0f172a;">৳3000</strong></span>
+                    </div>
+                    <div style="width: 100%; background: #e2e8f0; height: 8px; border-radius: 10px; overflow: hidden;">
+                        <div style="width: 44%; background: linear-gradient(90deg, #0d9488, #14b8a6); height: 100%;"></div>
+                    </div>
+                </div>
+
+                <button onclick="openDonateModal('Rohan', 'Football & Sports Shoes', 'AV-1026')" style="width: 100%; background: #0d9488; color: #ffffff; border: none; padding: 10px; border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer;">
+                    Fulfill Rohan's Wish
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Donation Modal Pop-up -->
+<div id="donateModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: #ffffff; width: 90%; max-width: 480px; border-radius: 16px; padding: 30px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); position: relative;">
+        <button onclick="closeDonateModal()" style="position: absolute; top: 18px; right: 20px; background: none; border: none; font-size: 20px; color: #64748b; cursor: pointer;">✕</button>
+
+        <h3 id="modalTitle" style="color: #0f172a; font-size: 20px; font-weight: 700; margin: 0 0 4px 0;">Fulfill Wishlist</h3>
+        <p id="modalSub" style="color: #0d9488; font-size: 14px; font-weight: 600; margin: 0 0 20px 0;">Item Name</p>
+
+        <form onsubmit="handleDonateSubmit(event)">
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">Your Name</label>
+                <input type="text" required placeholder="John Doe" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">Contribution Amount (BDT)</label>
+                <input type="number" required placeholder="e.g. 500" style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; box-sizing: border-box;">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">Payment Method</label>
+                <select style="width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; background: white;">
+                    <option>bKash / Nagad / Rocket</option>
+                    <option>Credit / Debit Card</option>
+                    <option>Bank Transfer</option>
+                </select>
+            </div>
+
+            <button type="submit" style="width: 100%; background: #0d9488; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer;">
+                Send Support
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openDonateModal(childName, item, childId) {
+        document.getElementById('modalTitle').innerText = "Fulfill " + childName + "'s Wish";
+        document.getElementById('modalSub').innerText = item + " (" + childId + ")";
+        document.getElementById('donateModal').style.display = 'flex';
+    }
+
+    function closeDonateModal() {
+        document.getElementById('donateModal').style.display = 'none';
+    }
+
+    function handleDonateSubmit(event) {
+        event.preventDefault();
+        alert('Thank you for supporting this child! We will contact you shortly with the payment confirmation.');
+        closeDonateModal();
+    }
+</script>
+{% endblock %}
