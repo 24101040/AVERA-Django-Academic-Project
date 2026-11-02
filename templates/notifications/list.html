@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+
+{% block title %}Notifications - Avera{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 30px auto; padding: 0 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+    <!-- Page Header -->
+    <div style="text-align: center; margin-bottom: 25px;">
+        <h2 style="color: #2c3e50; font-size: 28px; font-weight: 700; margin-bottom: 5px;">Notifications</h2>
+        <p style="color: #64748b; font-size: 14px;">Stay updated with Avera</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 30px;">
+        <button class="filter-btn active" onclick="filterNotifications('all', this)">All</button>
+        <button class="filter-btn" onclick="filterNotifications('unread', this)">Unread</button>
+        <button class="filter-btn" onclick="filterNotifications('gifts', this)">Gifts</button>
+        <button class="filter-btn" onclick="filterNotifications('updates', this)">Updates</button>
+    </div>
+
+    <!-- Notification Cards List -->
+    <div style="display: flex; flex-direction: column; gap: 18px;">
+
+        <!-- Notification Item 1 -->
+        <div class="notification-card gifts unread" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                <span style="font-size: 24px;">🎁</span>
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <h4 style="color: #1e293b; font-size: 16px; font-weight: 700; margin: 0;">Gift Received</h4>
+                        <span style="color: #94a3b8; font-size: 13px;">2 min ago</span>
+                    </div>
+                    <p style="color: #64748b; font-size: 14px; margin: 0 0 12px 0;">Your gift has been received by the organization.</p>
+                    <div style="text-align: right;">
+                        <button onclick="openModal('Gift Received', '🎁', 'Your gift (5x School Bags & Books) has been successfully received by Hope Care Organization. The children were thrilled to receive them!', '2 min ago', 'Gifts', 'Hope Care Organization')" style="background: none; border: none; color: #10b981; font-weight: 600; font-size: 14px; cursor: pointer; padding: 0;">View Details &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Item 2 -->
+        <div class="notification-card gifts" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                <span style="font-size: 24px;">📦</span>
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <h4 style="color: #1e293b; font-size: 16px; font-weight: 700; margin: 0;">Gift Status</h4>
+                        <span style="color: #94a3b8; font-size: 13px;">20 min ago</span>
+                    </div>
+                    <p style="color: #64748b; font-size: 14px; margin: 0 0 12px 0;">Your donated items have been delivered.</p>
+                    <div style="text-align: right;">
+                        <button onclick="openModal('Gift Status', '📦', 'Your delivery package tracking #AV-98231 has been marked as DELIVERED to Sunshine Children Home.', '20 min ago', 'Gifts', 'Sunshine Children Home')" style="background: none; border: none; color: #10b981; font-weight: 600; font-size: 14px; cursor: pointer; padding: 0;">View Details &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Item 3 -->
+        <div class="notification-card updates unread" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                <span style="font-size: 24px;">🌱</span>
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <h4 style="color: #1e293b; font-size: 16px; font-weight: 700; margin: 0;">New Milestone</h4>
+                        <span style="color: #94a3b8; font-size: 13px;">1 hour ago</span>
+                    </div>
+                    <p style="color: #64748b; font-size: 14px; margin: 0 0 12px 0;">A new growth and development update is available.</p>
+                    <div style="text-align: right;">
+                        <button onclick="openModal('New Milestone', '🌱', 'A new growth and academic record for Alex has been updated. Alex scored top marks in mathematics this term!', '1 hour ago', 'Updates', 'Avera Child Care Program')" style="background: none; border: none; color: #10b981; font-weight: 600; font-size: 14px; cursor: pointer; padding: 0;">View Details &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Item 4 -->
+        <div class="notification-card updates" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                <span style="font-size: 24px;">💖</span>
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <h4 style="color: #1e293b; font-size: 16px; font-weight: 700; margin: 0;">Wishlist Updated</h4>
+                        <span style="color: #94a3b8; font-size: 13px;">Today</span>
+                    </div>
+                    <p style="color: #64748b; font-size: 14px; margin: 0 0 12px 0;">Hope Care Organization added "School Bags" to their wishlist.</p>
+                    <div style="text-align: right;">
+                        <button onclick="openModal('Wishlist Updated', '💖', 'Hope Care Organization has added 20x Waterproof School Bags to their urgent wishlist for the upcoming school semester.', 'Today', 'Updates', 'Hope Care Organization')" style="background: none; border: none; color: #10b981; font-weight: 600; font-size: 14px; cursor: pointer; padding: 0;">View Details &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Item 5 -->
+        <div class="notification-card gifts" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+            <div style="display: flex; gap: 15px; align-items: flex-start;">
+                <span style="font-size: 24px;">🎉</span>
+                <div style="flex-grow: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <h4 style="color: #1e293b; font-size: 16px; font-weight: 700; margin: 0;">Wishlist Fulfilled</h4>
+                        <span style="color: #94a3b8; font-size: 13px;">Today</span>
+                    </div>
+                    <p style="color: #64748b; font-size: 14px; margin: 0 0 12px 0;">The required school bags have been fully fulfilled.</p>
+                    <div style="text-align: right;">
+                        <button onclick="openModal('Wishlist Fulfilled', '🎉', 'Thanks to generous donors like you, the entire wishlist for Hope Care Organization has been 100% completed!', 'Today', 'Gifts', 'Hope Care Organization')" style="background: none; border: none; color: #10b981; font-weight: 600; font-size: 14px; cursor: pointer; padding: 0;">View Details &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Details Modal Pop-up -->
+<div id="detailsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.5); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(4px);">
+    <div style="background: #ffffff; border-radius: 16px; width: 90%; max-width: 500px; padding: 25px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); position: relative; animation: fadeIn 0.2s ease-out;">
+
+        <!-- Modal Header -->
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+            <span id="modalIcon" style="font-size: 32px;">🎁</span>
+            <div>
+                <h3 id="modalTitle" style="margin: 0; color: #0f172a; font-size: 18px; font-weight: 700;">Notification Title</h3>
+                <span id="modalMeta" style="color: #64748b; font-size: 12px;">Category • Time</span>
+            </div>
+            <button onclick="closeModal()" style="margin-left: auto; background: none; border: none; font-size: 20px; color: #94a3b8; cursor: pointer; padding: 5px;">&times;</button>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #f1f5f9; margin-bottom: 15px;">
+
+        <!-- Modal Content Body -->
+        <div style="margin-bottom: 20px;">
+            <p id="modalBody" style="color: #334155; font-size: 14px; line-height: 1.6; margin-bottom: 15px;">Detailed description text will appear here...</p>
+            <div style="background: #f8fafc; border-radius: 8px; padding: 12px; border: 1px solid #e2e8f0;">
+                <span style="font-size: 12px; color: #64748b; display: block; margin-bottom: 2px;">Source / Organization:</span>
+                <strong id="modalSource" style="font-size: 13px; color: #0f172a;">Avera Organization</strong>
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div style="text-align: right;">
+            <button onclick="closeModal()" style="background: #0f172a; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Styling for Filter Buttons -->
+<style>
+    .filter-btn {
+        background: #f1f5f9;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 20px;
+        color: #64748b;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+        background: #008080;
+        color: #ffffff;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+
+<!-- JavaScript for Modal and Filtering -->
+<script>
+    function openModal(title, icon, details, time, category, source) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalIcon').innerText = icon;
+        document.getElementById('modalBody').innerText = details;
+        document.getElementById('modalMeta').innerText = category + ' • ' + time;
+        document.getElementById('modalSource').innerText = source;
+
+        document.getElementById('detailsModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('detailsModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        const modal = document.getElementById('detailsModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+
+    function filterNotifications(category, btn) {
+        // Toggle Active Button
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter Notification Items
+        const cards = document.querySelectorAll('.notification-card');
+        cards.forEach(card => {
+            if (category === 'all') {
+                card.style.display = 'block';
+            } else {
+                if (card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}
