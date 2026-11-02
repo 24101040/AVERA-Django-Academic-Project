@@ -1,0 +1,464 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* BASE / PAGE */
+    .adoption-page {
+        background:
+            radial-gradient(1200px 500px at 50% -100px, #f0fdf9 0%, rgba(240, 253, 249, 0) 70%),
+            transparent;
+        min-height: 100vh;
+        padding: 56px 0 72px;
+        font-feature-settings: "kern" 1;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* HERO */
+    .hero-card {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 26px;
+        padding: 56px 40px;
+        color: #ffffff;
+        margin-bottom: 44px;
+        box-shadow:
+            0 24px 48px -12px rgba(15, 23, 42, 0.28),
+            0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    /* subtle decorative glow */
+    .hero-card::before {
+        content: '';
+        position: absolute;
+        top: -140px;
+        right: -120px;
+        width: 380px;
+        height: 380px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(16, 185, 129, 0) 68%);
+        pointer-events: none;
+    }
+
+    .hero-card::after {
+        content: '';
+        position: absolute;
+        bottom: -160px;
+        left: -120px;
+        width: 340px;
+        height: 340px;
+        background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0) 70%);
+        pointer-events: none;
+    }
+
+    .hero-card > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-card h1 {
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+    }
+
+    .badge-pill {
+        background: rgba(16, 185, 129, 0.14);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.32);
+        padding: 7px 18px;
+        border-radius: 50px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        backdrop-filter: blur(4px);
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1e293b;
+        letter-spacing: -0.01em;
+        margin-bottom: 26px;
+        position: relative;
+        padding-bottom: 14px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 52px;
+        height: 4px;
+        background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+        border-radius: 4px;
+    }
+
+    /* INFO / STEP CARDS */
+    .info-card {
+        position: relative;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 30px 28px;
+        height: 100%;
+        transition:
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 0.3s ease;
+    }
+
+    .info-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(16, 185, 129, 0));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .info-card:hover {
+        transform: translateY(-6px);
+        box-shadow:
+            0 18px 36px -10px rgba(15, 23, 42, 0.12),
+            0 6px 14px rgba(15, 23, 42, 0.05);
+        border-color: #d5e3dd;
+    }
+
+    .info-card:hover::before {
+        opacity: 1;
+    }
+
+    .info-card h4,
+    .info-card h5 {
+        letter-spacing: -0.01em;
+    }
+
+    /* STEP NUMBER BADGE */
+    .step-number {
+        width: 46px;
+        height: 46px;
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        color: #059669;
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: 0.02em;
+        border: 1px solid rgba(16, 185, 129, 0.18);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+    }
+
+    .info-card:hover .step-number {
+        transform: scale(1.06) rotate(-3deg);
+        box-shadow: 0 6px 14px rgba(16, 185, 129, 0.22);
+    }
+
+    /* DOC LIST */
+    .doc-list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+        font-size: 0.95rem;
+        color: #475569;
+        line-height: 1.55;
+        transition: color 0.2s ease;
+    }
+
+    .doc-list-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .doc-list-item strong {
+        color: #1e293b;
+        font-weight: 600;
+    }
+
+    .doc-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+        margin-top: 1px;
+        color: #10b981;
+        font-weight: 700;
+        font-size: 0.9rem;
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 6px;
+        transition: background 0.2s ease;
+    }
+
+    .doc-list-item:hover .doc-icon {
+        background: rgba(16, 185, 129, 0.18);
+    }
+
+    /* STAT BOXES */
+    .stat-box {
+        position: relative;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 28px 24px 26px;
+        text-align: center;
+        height: 100%;
+        overflow: hidden;
+        transition:
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    .stat-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #10b981 0%, #34d399 50%, #10b981 100%);
+        opacity: 0.85;
+    }
+
+    .stat-box:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 28px -8px rgba(15, 23, 42, 0.1);
+        border-color: #d5e3dd;
+    }
+
+    .stat-number {
+        font-size: 2.15rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: #059669;
+        line-height: 1.1;
+        background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stat-label {
+        color: #64748b;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin-top: 8px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 767.98px) {
+        .adoption-page {
+            padding: 32px 0 48px;
+        }
+
+        .hero-card {
+            padding: 40px 24px;
+            border-radius: 20px;
+            margin-bottom: 32px;
+        }
+
+        .hero-card h1 {
+            font-size: 1.65rem;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+        }
+
+        .info-card {
+            padding: 24px 22px;
+        }
+
+        .stat-number {
+            font-size: 1.85rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .info-card,
+        .stat-box,
+        .step-number,
+        .doc-icon,
+        .info-card::before {
+            transition: none;
+        }
+    }
+</style>
+
+<div class="adoption-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <!-- HERO SECTION -->
+                <div class="hero-card text-center">
+                    <span class="badge-pill mb-3 d-inline-block">Official Adoption Portal</span>
+                    <h1 class="fw-bold mb-3">Begin Your Adoption Journey</h1>
+                    <p class="text-light opacity-75 max-w-2xl mx-auto fs-5 mb-0" style="max-width: 680px;">
+                        Providing safe, loving homes for children in need. Learn about our structured process, legal compliance and applicant requirements.
+                    </p>
+                </div>
+
+                <!-- OVERVIEW STATS -->
+                <div class="row g-3 mb-5">
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Legal &amp; Verified Process</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">250+</div>
+                            <div class="stat-label">Happy Families Reunited</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Dedicated Legal &amp; Advisory Support</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: ADOPTION PROCESS ROADMAP -->
+                <h3 class="section-title">Step-by-Step Adoption Roadmap</h3>
+                <div class="row g-4 mb-5">
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">01</div>
+                            <h5 class="fw-bold text-dark">Eligibility Check</h5>
+                            <p class="text-muted small mb-0">Applicants must meet legal age standards, demonstrate financial stability and pass clean background verification.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">02</div>
+                            <h5 class="fw-bold text-dark">Documentation</h5>
+                            <p class="text-muted small mb-0">Submit National ID/Passport, income certificates, medical records and police clearance reports through our secure portal.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">03</div>
+                            <h5 class="fw-bold text-dark">Home Assessment</h5>
+                            <p class="text-muted small mb-0">Authorized social officers conduct home visits to assess living conditions, safety and family readiness.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">04</div>
+                            <h5 class="fw-bold text-dark">Matching Process</h5>
+                            <p class="text-muted small mb-0">Our committee carefully matches applicants with children based on needs, background and emotional compatibility.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">05</div>
+                            <h5 class="fw-bold text-dark">Legal Guardianship</h5>
+                            <p class="text-muted small mb-0">Formal court proceedings and legal documentation are finalized in accordance with national child custody laws.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">06</div>
+                            <h5 class="fw-bold text-dark">Post-Adoption Follow-up</h5>
+                            <p class="text-muted small mb-0">Periodic check-ins and support counseling are provided during the first 12 months to ensure smooth integration.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SECTION 2: ELIGIBILITY & DOCUMENTS -->
+                <div class="row g-4 mb-5">
+
+                    <!-- Eligibility Criteria -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <h4 class="fw-bold text-dark mb-4">Applicant Requirements</h4>
+
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Age Limit:</strong> Primary applicants must be between 25 and 55 years old.</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Marital Status:</strong> Married couples (minimum 2 years of marriage) or eligible single applicants.</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Financial Capability:</strong> Stable monthly income to ensure comfortable living, healthcare, and education.</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Health Status:</strong> Physically and mentally capable of caring for a child (verified by medical certificate).</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Background Check:</strong> Clean legal record with no criminal history.</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Required Documents -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <h4 class="fw-bold text-dark mb-4">Required Documents</h4>
+
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>National ID Card / Passport Copies</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Marriage Certificate (If applicable)</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Proof of Income (Bank statement / Salary certificate / Tax return)</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Police Clearance Certificate</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Health Clearance from an Authorized Medical Practitioner</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Two Character Reference Letters</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
