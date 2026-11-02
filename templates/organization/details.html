@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ organization.name }} | Avera{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+    <h1>{{ organization.name }}</h1>
+    <p><strong>Address:</strong> {{ organization.address }}</p>
+    <p><strong>Contact:</strong> {{ organization.contact_number }} | {{ organization.email }}</p>
+    <hr>
+    <h3>About Organization</h3>
+    <p>{{ organization.description }}</p>
+</section>
+{% endblock %}
