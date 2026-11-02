@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .form-wrapper {
+        background: transparent;
+        min-height: 85vh;
+        padding: 40px 15px;
+    }
+    .feedback-form-card {
+        background: transparent;
+        border: 1px solid #e8edf3;
+        border-radius: 20px;
+        padding: 35px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+    .form-group-item {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    .form-label-custom {
+        display: block;
+        font-weight: 600;
+        color: #334155;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+    }
+    .btn-submit {
+        background: #0d6efd;
+        color: #ffffff;
+        font-weight: 600;
+        padding: 12px 25px;
+        border-radius: 10px;
+        border: none;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+        width: 100%;
+    }
+    .btn-submit:hover {
+        background: #0b5ed7;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(13, 110, 253, 0.35);
+        color: #ffffff;
+    }
+</style>
+
+<div class="form-wrapper">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="feedback-form-card">
+
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <div class="mb-2 fs-1">💬</div>
+                        <h3 class="fw-bold text-dark mb-1">Share Your Feedback</h3>
+                        <p class="text-muted small mb-0">Your feedback helps us improve our platform and support activities.</p>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Name Field -->
+                        <div class="form-group-item">
+                            <label class="form-label-custom">👤 Your Name</label>
+                            {{ form.supporter_name }}
+                            {% if form.supporter_name.errors %}
+                                <div class="text-danger small mt-1">{{ form.supporter_name.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Gift Field -->
+                        <div class="form-group-item">
+                            <label class="form-label-custom">🎁 Select Gift Option</label>
+                            {{ form.gift }}
+                            {% if form.gift.errors %}
+                                <div class="text-danger small mt-1">{{ form.gift.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Comment Field -->
+                        <div class="form-group-item">
+                            <label class="form-label-custom">💬 Message / Comment</label>
+                            {{ form.comment }}
+                            {% if form.comment.errors %}
+                                <div class="text-danger small mt-1">{{ form.comment.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Proof Image Field -->
+                        <div class="form-group-item">
+                            <label class="form-label-custom">📷 Proof Image <span class="text-muted fw-normal">(Optional)</span></label>
+                            {{ form.proof_image }}
+                            <small class="text-muted d-block mt-1" style="font-size: 0.8rem;">You can upload an image as proof of your contribution.</small>
+                            {% if form.proof_image.errors %}
+                                <div class="text-danger small mt-1">{{ form.proof_image.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-submit fs-6">
+                                ✨ Submit Feedback
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Back link -->
+                    <div class="text-center mt-4 pt-3 border-top">
+                        <a href="{% url 'feedback_list' %}" class="text-decoration-none text-secondary small fw-semibold">
+                            ← Back to Feedback List
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
