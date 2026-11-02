@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ child.display_name }} | Avera{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+    <h1>{{ child.display_name }}</h1>
+    <p><strong>Organization:</strong> {{ child.organization.name }}</p>
+    <p>{{ child.general_description }}</p>
+
+    <h2 class="mt-5">Milestones & Updates</h2>
+    <div class="feature-grid">
+        {% for milestone in milestones %}
+        <div class="feature-card">
+            <h3>{{ milestone.title }}</h3>
+            <small class="text-muted">{{ milestone.update_date }}</small>
+            <p class="mt-2">{{ milestone.update_text }}</p>
+        </div>
+        {% empty %}
+        <p>No milestones recorded yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
