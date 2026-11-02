@@ -1,0 +1,274 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .adoption-page {
+        background: transparent;
+        min-height: 100vh;
+        padding: 50px 0;
+    }
+
+    /* Hero Banner */
+    .hero-card {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border-radius: 24px;
+        padding: 48px 36px;
+        color: #ffffff;
+        margin-bottom: 40px;
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+    }
+
+    .badge-pill {
+        background: rgba(16, 185, 129, 0.15);
+        color: #10b981;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 24px;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 48px;
+        height: 4px;
+        background: #10b981;
+        border-radius: 2px;
+        margin-top: 8px;
+    }
+
+    /* Feature Cards */
+    .info-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 28px;
+        height: 100%;
+        transition: all 0.25s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        border-color: #cbd5e1;
+    }
+
+    .step-number {
+        width: 42px;
+        height: 42px;
+        background: #ecfdf5;
+        color: #059669;
+        font-weight: 700;
+        font-size: 1.1rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+    }
+
+    /* Document List */
+    .doc-list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 14px;
+        font-size: 0.95rem;
+        color: #475569;
+    }
+
+    .doc-icon {
+        color: #10b981;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    /* Stat Box */
+    .stat-box {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 24px;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #059669;
+    }
+</style>
+
+<div class="adoption-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <!-- HERO SECTION -->
+                <div class="hero-card text-center">
+                    <span class="badge-pill mb-3 d-inline-block">Official Adoption Portal</span>
+                    <h1 class="fw-bold mb-3">Begin Your Adoption Journey</h1>
+                    <p class="text-light opacity-75 max-w-2xl mx-auto fs-5 mb-0" style="max-width: 680px;">
+                        Providing safe, loving homes for children in need. Learn about our structured process, legal compliance and applicant requirements.
+                    </p>
+                </div>
+
+                <!-- OVERVIEW STATS -->
+                <div class="row g-3 mb-5">
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">100%</div>
+                            <div class="text-muted small fw-semibold mt-1">Legal & Verified Process</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">250+</div>
+                            <div class="text-muted small fw-semibold mt-1">Happy Families Reunited</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-box">
+                            <div class="stat-number">24/7</div>
+                            <div class="text-muted small fw-semibold mt-1">Dedicated Legal & Advisory Support</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 1: ADOPTION PROCESS ROADMAP -->
+                <h3 class="section-title">Step-by-Step Adoption Roadmap</h3>
+                <div class="row g-4 mb-5">
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">01</div>
+                            <h5 class="fw-bold text-dark">Eligibility Check</h5>
+                            <p class="text-muted small mb-0">Applicants must meet legal age standards, demonstrate financial stability and pass clean background verification.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">02</div>
+                            <h5 class="fw-bold text-dark">Documentation</h5>
+                            <p class="text-muted small mb-0">Submit National ID/Passport, income certificates, medical records and police clearance reports through our secure portal.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">03</div>
+                            <h5 class="fw-bold text-dark">Home Assessment</h5>
+                            <p class="text-muted small mb-0">Authorized social officers conduct home visits to assess living conditions, safety and family readiness.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">04</div>
+                            <h5 class="fw-bold text-dark">Matching Process</h5>
+                            <p class="text-muted small mb-0">Our committee carefully matches applicants with children based on needs, background and emotional compatibility.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">05</div>
+                            <h5 class="fw-bold text-dark">Legal Guardianship</h5>
+                            <p class="text-muted small mb-0">Formal court proceedings and legal documentation are finalized in accordance with national child custody laws.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="info-card">
+                            <div class="step-number">06</div>
+                            <h5 class="fw-bold text-dark">Post-Adoption Follow-up</h5>
+                            <p class="text-muted small mb-0">Periodic check-ins and support counseling are provided during the first 12 months to ensure smooth integration.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SECTION 2: ELIGIBILITY & DOCUMENTS -->
+                <div class="row g-4 mb-5">
+
+                    <!-- Eligibility Criteria -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <h4 class="fw-bold text-dark mb-4">Applicant Requirements</h4>
+
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Age Limit:</strong> Primary applicants must be between 25 and 55 years old.</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Marital Status:</strong> Married couples (minimum 2 years of marriage) or eligible single applicants.</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Financial Capability:</strong> Stable monthly income to ensure comfortable living, healthcare, and education.</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Health Status:</strong> Physically and mentally capable of caring for a child (verified by medical certificate).</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">✓</span>
+                                <div><strong>Background Check:</strong> Clean legal record with no criminal history.</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Required Documents -->
+                    <div class="col-md-6">
+                        <div class="info-card">
+                            <h4 class="fw-bold text-dark mb-4">Required Documents</h4>
+
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>National ID Card / Passport Copies</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Marriage Certificate (If applicable)</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Proof of Income (Bank statement / Salary certificate / Tax return)</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Police Clearance Certificate</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Health Clearance from an Authorized Medical Practitioner</div>
+                            </div>
+                            <div class="doc-list-item">
+                                <span class="doc-icon">📄</span>
+                                <div>Two Character Reference Letters</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
