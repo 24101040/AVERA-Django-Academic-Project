@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 from .models import SupporterFeedback
 from .forms import SupporterFeedbackForm
 
@@ -35,3 +36,28 @@ class SupporterFeedbackTest(TestCase):
         })
 
         self.assertTrue(form.is_valid())
+
+
+class FeedbackViewTest(TestCase):
+
+    def test_feedback_list_page_loads(self):
+        response = self.client.get(reverse('feedback_list'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_feedback_create_page_loads(self):
+        response = self.client.get(reverse('feedback_create'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_feedback_creation_redirects(self):
+        response = self.client.post(reverse('feedback_create'), {
+            'supporter_name': 'Jerin',
+            'gift': 'Books',
+            'comment': 'Thank you!'
+        })
+
+        self.assertRedirects(
+            response,
+            reverse('feedback_list')
+        )
+
+        self.assertEqual(SupporterFeedback.objects.count(), 1)
