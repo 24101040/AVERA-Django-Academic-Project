@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ story.title }} - Avera Stories{% endblock %}
+
+{% block content %}
+<style>
+    .story-details-container {
+        background-color: #f8fafc;
+        min-height: 85vh;
+        padding: 50px 0;
+    }
+
+    .story-card-large {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    .story-img-banner {
+        width: 100%;
+        max-height: 450px;
+        object-fit: cover;
+    }
+
+    .badge-year {
+        background-color: #ecfdf5;
+        color: #059669;
+        font-weight: 700;
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        display: inline-block;
+    }
+
+    .story-title {
+        color: #1e293b;
+        font-weight: 800;
+        font-size: 2.2rem;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .story-author-meta {
+        color: #64748b;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .story-text-content {
+        color: #334155;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        white-space: pre-line;
+    }
+
+    .btn-back {
+        background-color: #ffffff;
+        color: #059669;
+        border: 1px solid #10b981;
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-back:hover {
+        background-color: #10b981;
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+</style>
+
+<div class="story-details-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+
+                <!-- Back Navigation Button -->
+                <div class="mb-4">
+                    <a href="{% url 'stories_list' %}" class="btn-back">
+                        ← Back to All Stories
+                    </a><br><br>
+                </div>
+
+                <!-- Story Detail Main Card -->
+                <div class="story-card-large">
+
+                    <!-- Cover Image -->
+                    {% if story.image %}
+                        <img src="{{ story.image.url }}" alt="{{ story.title }}" class="story-img-banner">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1000&auto=format&fit=crop" alt="Default Story Image" class="story-img-banner">
+                    {% endif %}
+
+                    <!-- Story Body Content -->
+                    <div class="p-4 p-md-5">
+
+                        <span class="badge-year">{{ story.year }}</span>
+
+                        <h1 class="story-title">{{ story.title }}</h1>
+
+                        <div class="story-author-meta">
+                            <span>✍️ Published by <strong>{{ story.author }}</strong></span>
+                            {% if story.created_at %}
+                                <span class="ms-3">🗓️ {{ story.created_at|date:"F d, Y" }}</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="story-text-content">
+                            {{ story.content }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
