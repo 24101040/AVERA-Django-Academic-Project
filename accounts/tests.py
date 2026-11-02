@@ -25,3 +25,28 @@ class ProfileModelTest(TestCase):
         profile = Profile.objects.create(user=self.user)
 
         self.assertEqual(str(profile), 'testuser')
+from django.urls import reverse
+
+
+class AccountViewTest(TestCase):
+
+    def test_register_page_loads(self):
+        response = self.client.get(reverse('register'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_page_loads(self):
+        response = self.client.get(reverse('login'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_with_valid_credentials(self):
+        User.objects.create_user(
+            username='loginuser',
+            password='testpassword123'
+        )
+
+        response = self.client.post(reverse('login'), {
+            'username': 'loginuser',
+            'password': 'testpassword123'
+        })
+
+        self.assertRedirects(response, reverse('home'))
