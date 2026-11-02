@@ -1,0 +1,339 @@
+{% extends 'base.html' %}
+
+{% block title %}Adoption Stories - Avera{% endblock %}
+
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="container mt-3">
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+<style>
+    .stories-page {
+        background-color: transparent;
+        min-height: 85vh;
+        padding: 50px 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .story-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .story-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+        border-color: #cbd5e1;
+    }
+
+    .story-img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+    }
+
+    .badge-year {
+        background-color: #ecfdf5;
+        color: #059669;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        display: inline-block;
+    }
+
+    .cta-card {
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        border-radius: 20px;
+        padding: 45px 30px;
+        color: #ffffff;
+        box-shadow: 0 10px 25px rgba(5, 150, 105, 0.2);
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .btn-custom-light {
+        background-color: #ffffff;
+        color: #059669 !important;
+        font-weight: 700;
+        padding: 12px 28px;
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 15px;
+    }
+
+    .btn-custom-light:hover {
+        background-color: #f1f5f9;
+        transform: translateY(-2px);
+    }
+
+    .custom-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .custom-modal-overlay.active {
+        display: flex;
+    }
+
+    .custom-modal-box {
+        background: #ffffff;
+        width: 100%;
+        max-width: 550px;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        animation: modalFadeIn 0.3s ease;
+        margin: 20px;
+    }
+
+    @keyframes modalFadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-header-custom {
+        padding: 20px 24px;
+        background: #f8fafc;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-header-custom h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .close-modal-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #64748b;
+        cursor: pointer;
+        line-height: 1;
+    }
+
+    .modal-body-custom {
+        padding: 24px;
+    }
+
+    .form-group-custom {
+        margin-bottom: 18px;
+    }
+
+    .form-group-custom label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #475569;
+        margin-bottom: 6px;
+    }
+
+    .form-control-custom {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        outline: none;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+    }
+
+    .form-control-custom:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    }
+
+    .modal-footer-custom {
+        padding: 16px 24px;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    .btn-cancel {
+        background: #ffffff;
+        border: 1px solid #cbd5e1;
+        color: #475569;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .btn-submit {
+        background: #10b981;
+        border: none;
+        color: #ffffff;
+        padding: 10px 24px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .btn-submit:hover {
+        background: #059669;
+    }
+</style>
+
+<div class="stories-page">
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-dark display-6 mb-2">Heartwarming Adoption Stories</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">
+                Read real-life adoption journeys shared by loving families across the Avera network.
+            </p><br>
+        </div>
+
+        <!-- Stories Grid Container -->
+        <div class="row g-4 mb-5">
+            {% for story in stories %}
+            <div class="col-md-4">
+                <div class="story-card">
+                    {% if story.image %}
+                        <img src="{{ story.image.url }}" alt="{{ story.title }}" class="story-img">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop" alt="Default Story Image" class="story-img">
+                    {% endif %}
+                    
+                    <div class="p-4 d-flex flex-column flex-grow-1">
+                        <div>
+                            <span class="badge-year text-uppercase">{{ story.year }}</span>
+                            <h5 class="fw-bold text-dark mt-2 mb-2">{{ story.title }}</h5>
+                            <p class="text-secondary small mb-3" style="line-height: 1.6;">
+                                "{{ story.content|truncatewords:20 }}"
+                            </p>
+                        </div><br>
+                        <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
+                            <span class="text-muted small fw-semibold">— {{ story.author }}</span>
+                            <a href="{% url 'story_details' story.pk %}" class="btn btn-sm btn-outline-success rounded-pill px-3 fw-semibold">Read Full</a>
+                        </div>
+                    </div>
+                </div>
+            </div><br><br>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <div class="bg-white p-5 rounded-4 shadow-sm border mx-auto" style="max-width: 500px;">
+                    <div class="fs-1 mb-2">📖</div>
+                    <h5 class="fw-bold text-dark mb-1">No stories published yet</h5>
+                    <p class="text-muted small">Be the very first member to share an inspiring adoption story!</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Call to Action Banner -->
+        <div class="cta-card">
+            <h3 class="fw-bold mb-2">Ready to Write Your Own Story?</h3>
+            <p class="opacity-90 mb-0 mx-auto" style = "center" style="max-width: 550px;">
+                Share your adoption journey or foster experience to inspire and encourage other families.
+            </p>
+            <button type="button" class="btn-custom-light" onclick="openStoryModal()">
+                ✍️ Get Started & Share Story
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- GUARANTEED WORKING CUSTOM POP-UP MODAL -->
+<div class="custom-modal-overlay" id="storyModalOverlay">
+    <div class="custom-modal-box">
+        
+        <div class="modal-header-custom">
+            <h3>Publish Your Adoption Story</h3>
+            <button class="close-modal-btn" onclick="closeStoryModal()">&times;</button>
+        </div>
+
+        <form method="POST" action="{% url 'stories_list' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-body-custom">
+                
+                <div class="form-group-custom">
+                    <label>Story Title</label>
+                    <input type="text" name="title" class="form-control-custom" required placeholder="e.g. A New Chapter for Little Liam">
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6 form-group-custom">
+                        <label>Year Tag</label>
+                        <input type="text" name="year" class="form-control-custom" placeholder="ADOPTED IN 2026" value="ADOPTED IN 2026">
+                    </div>
+                    <div class="col-6 form-group-custom">
+                        <label>Author / Family Name</label>
+                        <input type="text" name="author" class="form-control-custom" required placeholder="e.g. The Rahman Family">
+                    </div>
+                </div>
+
+                <div class="form-group-custom">
+                    <label>Story Content</label>
+                    <textarea name="content" class="form-control-custom" rows="4" required placeholder="Share your experience and message..."></textarea>
+                </div>
+
+                <div class="form-group-custom">
+                    <label>Story Photo (Optional)</label>
+                    <input type="file" name="image" class="form-control-custom" accept="image/*">
+                </div>
+
+            </div>
+
+            <div class="modal-footer-custom">
+                <button type="button" class="btn-cancel" onclick="closeStoryModal()">Cancel</button>
+                <button type="submit" class="btn-submit">Publish Story</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script>
+    function openStoryModal() {
+        document.getElementById('storyModalOverlay').classList.add('active');
+    }
+
+    function closeStoryModal() {
+        document.getElementById('storyModalOverlay').classList.remove('active');
+    }
+
+    window.onclick = function(event) {
+        const overlay = document.getElementById('storyModalOverlay');
+        if (event.target === overlay) {
+            closeStoryModal();
+        }
+    }
+</script>
+{% endblock %}
