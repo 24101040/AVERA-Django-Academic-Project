@@ -24,6 +24,7 @@ AVERA is an informational and awareness platform designed to educate, raise awar
 
 ## Project Directory Structure
 
+```
 avera_project/
 │
 ├── accounts/               # User Authentication & Profile App
@@ -37,9 +38,8 @@ avera_project/
 ├── static/                 # Global Static Files (CSS, JS, Assets)
 ├── stories/                # Success Story Showcase App
 ├── support/                # Wishlist & Gift Tracking Journey App
-├── feedback/                
 │
-├── templates/              
+├── templates/
 │   ├── accounts/
 │   ├── adoption/
 │   ├── children/
@@ -55,6 +55,7 @@ avera_project/
 ├── db.sqlite3              # Local Database
 ├── manage.py               # Project Execution Script
 └── README.md               # Documentation
+```
 
 ## How to Run the Project (Windows / PyCharm)
 
